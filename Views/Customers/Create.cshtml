@@ -1,0 +1,45 @@
+@model Customer
+
+@{
+    ViewData["Title"] = "Create Customer";
+}
+
+<section class="page-heading">
+    <div>
+        <p class="eyebrow">New customer</p>
+        <h1>Create Customer</h1>
+    </div>
+</section>
+
+<section class="content-section form-section">
+    <form asp-action="Create" method="post" class="row g-3 needs-validation" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="col-md-6">
+            <label asp-for="FullName" class="form-label">Full Name</label>
+            <input asp-for="FullName" class="form-control" placeholder="Ayesha Khan" />
+            <span asp-validation-for="FullName" class="text-danger small"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" placeholder="customer@example.com" />
+            <span asp-validation-for="Email" class="text-danger small"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Phone" class="form-label">Phone</label>
+            <input asp-for="Phone" class="form-control" placeholder="+92 300 0000000" />
+            <span asp-validation-for="Phone" class="text-danger small"></span>
+        </div>
+
+        <div class="col-12 form-actions">
+            <button type="submit" class="btn btn-primary">Save Customer</button>
+            <a class="btn btn-outline-secondary" asp-controller="Customers" asp-action="Index">Cancel</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

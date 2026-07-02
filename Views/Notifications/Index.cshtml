@@ -1,0 +1,37 @@
+@{
+    ViewData["Title"] = "Notifications";
+}
+
+<section class="page-heading">
+    <div>
+        <p class="eyebrow">SignalR broadcast</p>
+        <h1>Real-Time Notifications</h1>
+    </div>
+    <span id="connectionStatus" class="status-pill status-waiting">Connecting</span>
+</section>
+
+<section class="content-section">
+    <div class="row g-3">
+        <div class="col-lg-8">
+        <label for="messageInput" class="form-label">Message</label>
+        <div class="input-group">
+            <input id="messageInput" class="form-control" type="text" autocomplete="off" placeholder="Type a notification message" />
+            <button id="sendButton" class="btn btn-primary" type="button">Send</button>
+        </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div class="section-title">
+            <h2>Live Messages</h2>
+            <span>All open tabs</span>
+        </div>
+        <div id="emptyMessages" class="empty-state">No messages yet.</div>
+        <ul id="messagesList" class="list-group notification-list"></ul>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/lib/microsoft-signalr/signalr.min.js" asp-append-version="true"></script>
+    <script src="~/js/notifications.js" asp-append-version="true"></script>
+}

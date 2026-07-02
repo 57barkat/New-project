@@ -1,0 +1,14 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+TestResults/
+.dotnet/
+.dotnet-home/
+.nuget/
+.localappdata/
+.appdata/
+.run-output.log
+.run-error.log
+dotnet-install.ps1

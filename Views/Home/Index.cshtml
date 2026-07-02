@@ -1,0 +1,90 @@
+@model HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="page-heading">
+    <div>
+        <p class="eyebrow">In-memory CRM overview</p>
+        <h1>Customer Dashboard</h1>
+    </div>
+    <a class="btn btn-primary" asp-controller="Customers" asp-action="Index">View Customers</a>
+</section>
+
+<section class="metrics-grid mb-4">
+    <div class="metric-panel">
+        <span>Total Customers</span>
+        <strong>@Model.TotalCustomers</strong>
+    </div>
+    <div class="metric-panel">
+        <span>Active</span>
+        <strong>@Model.ActiveCustomerCount</strong>
+    </div>
+    <div class="metric-panel">
+        <span>Inactive</span>
+        <strong>@Model.InactiveCustomerCount</strong>
+    </div>
+    <div class="metric-panel">
+        <span>Created in @Model.CurrentYear</span>
+        <strong>@Model.CurrentYearCustomerCount</strong>
+    </div>
+</section>
+
+<section class="content-section mb-4">
+    <div class="section-title">
+        <h2>Customer Summaries</h2>
+        <span>Task 1</span>
+    </div>
+    <div class="list-group summary-list">
+        @foreach (var customer in Model.SummaryCustomers)
+        {
+            <div class="list-group-item d-flex justify-content-between gap-3 flex-wrap">
+                <span>@customer.GetSummary()</span>
+                <span class="badge @(customer.IsActive ? "text-bg-success" : "text-bg-secondary") align-self-center">
+                    @(customer.IsActive ? "Active" : "Inactive")
+                </span>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="section-title">
+        <h2>LINQ Results</h2>
+        <span>Task 2</span>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-lg-4">
+            <div class="insight-panel h-100">
+                <h3>Active Customers Sorted by Name</h3>
+                <ol class="mb-0">
+                    @foreach (var customer in Model.ActiveCustomersSortedByName)
+                    {
+                        <li>@customer.FullName</li>
+                    }
+                </ol>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="insight-panel h-100">
+                <h3>First Gmail Customer</h3>
+                @if (Model.FirstGmailCustomer is null)
+                {
+                    <p class="mb-0 text-muted">No Gmail customer found.</p>
+                }
+                else
+                {
+                    <p class="mb-0">@Model.FirstGmailCustomer.GetSummary()</p>
+                }
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="insight-panel h-100">
+                <h3>Created in @Model.CurrentYear</h3>
+                <p class="metric-number mb-0">@Model.CurrentYearCustomerCount</p>
+            </div>
+        </div>
+    </div>
+</section>

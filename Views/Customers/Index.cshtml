@@ -1,0 +1,53 @@
+@model IEnumerable<Customer>
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<section class="page-heading">
+    <div>
+        <p class="eyebrow">Customer directory</p>
+        <h1>Customers</h1>
+    </div>
+    <a class="btn btn-primary" asp-controller="Customers" asp-action="Create">Create Customer</a>
+</section>
+
+<section class="content-section">
+    <div class="section-title">
+        <h2>Customer List</h2>
+        <span>@Model.Count() records</span>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table crm-table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model)
+                {
+                    <tr>
+                        <td class="fw-semibold">@customer.FullName</td>
+                        <td>@customer.Email</td>
+                        <td>@customer.Phone</td>
+                        <td>
+                            @if (customer.IsActive)
+                            {
+                                <span class="badge rounded-pill text-bg-success">Active</span>
+                            }
+                            else
+                            {
+                                <span class="badge rounded-pill text-bg-secondary">Inactive</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
